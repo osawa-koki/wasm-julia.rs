@@ -18,6 +18,8 @@ pub struct Space {
     x_max: Option<f64>,
     y_min: Option<f64>,
     y_max: Option<f64>,
+    cx: Option<f64>,
+    cy: Option<f64>,
     max_iterations: Option<u32>,
     hue_option: Option<HueOption>,
     cells: Option<Vec<u32>>,
@@ -41,6 +43,8 @@ impl Space {
             x_max: None,
             y_min: None,
             y_max: None,
+            cx: None,
+            cy: None,
             max_iterations: None,
             hue_option: None,
             cells: None,
@@ -67,6 +71,8 @@ impl Space {
         x_max: f64,
         y_min: f64,
         y_max: f64,
+        cx: f64,
+        cy: f64,
         hue_option: HueOption,
         max_iterations: u32,
     ) {
@@ -76,6 +82,8 @@ impl Space {
         self.x_max = Some(x_max);
         self.y_min = Some(y_min);
         self.y_max = Some(y_max);
+        self.cx = Some(cx);
+        self.cy = Some(cy);
         self.hue_option = Some(hue_option);
         self.max_iterations = Some(max_iterations);
 
@@ -90,19 +98,53 @@ impl Space {
         let x_max = self.x_max.unwrap();
         let y_min = self.y_min.unwrap();
         let y_max = self.y_max.unwrap();
+        let cx = self.cx.unwrap();
+        let cy = self.cy.unwrap();
         let hue_option = self.hue_option.as_mut().unwrap();
         let max_iterations = self.max_iterations.unwrap();
 
+        // for y in 0..height {
+        //     for x in 0..width {
+        //         let mut zx = 0.0;
+        //         let mut zy = 0.0;
+        //         let mut zx2 = 0.0;
+        //         let mut zy2 = 0.0;
+        //         let mut i = 0;
+        //         while zx2 + zy2 <= 4.0 && i < max_iterations {
+        //             zy = 2.0 * zx * zy + (y as f64 / height as f64) * (y_max - y_min) + y_min;
+        //             zx = zx2 - zy2 + (x as f64 / width as f64) * (x_max - x_min) + x_min;
+        //             zx2 = zx * zx;
+        //             zy2 = zy * zy;
+        //             i += 1;
+        //         }
+        //         // sheet.getRange(y + 1, x + 1).setBackground(rgb2Hex(0, 0, i * 255 / MAX_ITERATIONS))
+        //         let cells = self.cells.as_mut().unwrap();
+        //         let index = (y * width + x) as usize;
+        //         match hue_option {
+        //             HueOption::Red => {
+        //                 cells[index] = rgb_to_number(i * 255 / max_iterations, 0, 0);
+        //             }
+        //             HueOption::Green => {
+        //                 cells[index] = rgb_to_number(0, i * 255 / max_iterations, 0);
+        //             }
+        //             HueOption::Blue => {
+        //                 cells[index] = rgb_to_number(0, 0, i * 255 / max_iterations);
+        //             }
+        //         }
+        //     }
+        // }
+
+        // ジュリア集合
         for y in 0..height {
             for x in 0..width {
-                let mut zx = 0.0;
-                let mut zy = 0.0;
-                let mut zx2 = 0.0;
-                let mut zy2 = 0.0;
+                let mut zx = (x as f64 / width as f64) * (x_max - x_min) + x_min;
+                let mut zy = (y as f64 / height as f64) * (y_max - y_min) + y_min;
+                let mut zx2 = zx * zx;
+                let mut zy2 = zy * zy;
                 let mut i = 0;
                 while zx2 + zy2 <= 4.0 && i < max_iterations {
-                    zy = 2.0 * zx * zy + (y as f64 / height as f64) * (y_max - y_min) + y_min;
-                    zx = zx2 - zy2 + (x as f64 / width as f64) * (x_max - x_min) + x_min;
+                    zy = 2.0 * zx * zy + cy;
+                    zx = zx2 - zy2 + cx;
                     zx2 = zx * zx;
                     zy2 = zy * zy;
                     i += 1;
