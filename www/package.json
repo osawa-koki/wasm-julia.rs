@@ -1,0 +1,54 @@
+{
+  "name": "create-wasm-app",
+  "version": "0.1.0",
+  "description": "create an app to consume rust-generated wasm packages",
+  "main": "index.js",
+  "bin": {
+    "create-wasm-app": ".bin/create-wasm-app.js"
+  },
+  "scripts": {
+    "build": "yarn build:ts && yarn build:wp && cp ./tako.png ./dist/",
+    "build:ts": "tsc",
+    "build:wp": "webpack --config webpack.config.js",
+    "start": "webpack-cli serve --mode development --config webpack.config.js --port 8000",
+    "lint": "eslint --ext .ts ./",
+    "lint:fix": "eslint --ext .ts ./ --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rustwasm/create-wasm-app.git"
+  },
+  "keywords": [
+    "webassembly",
+    "wasm",
+    "rust",
+    "webpack"
+  ],
+  "author": "Ashley Williams <ashley666ashley@gmail.com>",
+  "license": "(MIT OR Apache-2.0)",
+  "bugs": {
+    "url": "https://github.com/rustwasm/create-wasm-app/issues"
+  },
+  "homepage": "https://github.com/rustwasm/create-wasm-app#readme",
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.2",
+    "copy-webpack-plugin": "^6.4.1",
+    "css-loader": "^4.0.0",
+    "style-loader": "^2.0.0",
+    "typescript": "^5.2.2",
+    "wasm-julia-rs": "file:../pkg/",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^4.10.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^39.1.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "webpack-dev-server": "^4.15.1"
+  }
+}

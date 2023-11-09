@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="./tako.png" type="image/x-icon" />
+    <title>wasm-julia.rs</title>
+  </head>
+  <body>
+    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
+    <h1 class="text-center">🧀 wasm-julia.rs 🧀</h1>
+    <div class="d-flex justify-content-center">
+      <table class="table d-block w-auto">
+        <thead>
+          <tr>
+            <th class="text-end" width="50%">Key</th>
+            <th class="text-start" width="50%">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="text-end">width</th>
+            <td class="text-start"><input type="number" id="width" class="form-control" min="10" max="10000" step="10" /></td>
+          </tr>
+          <tr>
+            <th class="text-end">height</th>
+            <td class="text-start"><input type="number" id="height" class="form-control" min="10" max="10000" step="10" /></td>
+          </tr>
+          <tr>
+            <th class="text-end">x_min</th>
+            <td class="text-start"><input type="number" id="x_min" class="form-control" min="-10" max="10" step="0.1" /></td>
+          </tr>
+          <tr>
+            <th class="text-end">x_max</th>
+            <td class="text-start"><input type="number" id="x_max" class="form-control" min="-10" max="10" step="0.1" /></td>
+          </tr>
+          <tr>
+            <th class="text-end">y_min</th>
+            <td class="text-start"><input type="number" id="y_min" class="form-control" min="-10" max="10" step="0.1" /></td>
+          </tr>
+          <tr>
+            <th class="text-end">y_max</th>
+            <td class="text-start"><input type="number" id="y_max" class="form-control" min="-10" max="10" step="0.1" /></td>
+          </tr>
+          <tr>
+            <th class="text-end">Hue</th>
+            <td class="text-start">
+              <select id="hue_option" class="form-control">
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th class="text-end">max_iterations</th>
+            <td class="text-start"><input type="number" id="max_iterations" class="form-control" min="1" max="1000" step="1" /></td>
+          </tr>
+          <tr>
+            <td class="text-center" colspan="2"><button id="button" class="btn btn-primary">Draw</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <canvas id="canvas" class="d-block mx-auto my-3 mw-100"></canvas>
+    <script src="./bootstrap.js"></script>
+  </body>
+</html>
