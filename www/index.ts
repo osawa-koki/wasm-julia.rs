@@ -10,16 +10,20 @@ const xMinElement = document.getElementById('x_min')! as HTMLInputElement
 const xMaxElement = document.getElementById('x_max')! as HTMLInputElement
 const yMinElement = document.getElementById('y_min')! as HTMLInputElement
 const yMaxElement = document.getElementById('y_max')! as HTMLInputElement
+const cxElement = document.getElementById('cx')! as HTMLInputElement
+const cyElement = document.getElementById('cy')! as HTMLInputElement
 const hueOptionElement = document.getElementById('hue_option')! as HTMLInputElement
 const maxIterationsElement = document.getElementById('max_iterations')! as HTMLInputElement
 const buttonElement = document.getElementById('button')! as HTMLButtonElement
 
 widthElement.value = '1000'
 heightElement.value = '1000'
-xMinElement.value = '-2.0'
-xMaxElement.value = '1.0'
-yMinElement.value = '-1.5'
-yMaxElement.value = '1.5'
+xMinElement.value = '-1.7'
+xMaxElement.value = '1.7'
+yMinElement.value = '-1.7'
+yMaxElement.value = '1.7'
+cxElement.value = '-0.7'
+cyElement.value = '0.5'
 hueOptionElement.value = 'red'
 maxIterationsElement.value = '30'
 
@@ -39,6 +43,8 @@ async function draw (): Promise<void> {
   const xMax = parseFloat(xMaxElement.value)
   const yMin = parseFloat(yMinElement.value)
   const yMax = parseFloat(yMaxElement.value)
+  const cx = parseFloat(cxElement.value)
+  const cy = parseFloat(cyElement.value)
   const hueOption = (() => {
     switch (hueOptionElement.value) {
       case 'red':
@@ -60,6 +66,8 @@ async function draw (): Promise<void> {
     xMax,
     yMin,
     yMax,
+    cx,
+    cy,
     hueOption,
     maxIterations
   )
